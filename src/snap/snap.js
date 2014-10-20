@@ -216,6 +216,8 @@
 		};
 
 		this.scrollTo(posX, posY, time, easing);
+
+		this._execEvent('goToPage');
 	},
 
 	next: function (time, easing) {

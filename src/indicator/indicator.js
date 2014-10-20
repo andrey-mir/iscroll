@@ -167,8 +167,14 @@ Indicator.prototype = {
 			newX, newY,
 			timestamp = utils.getTime();
 
+		this.cancelled = false;
+
 		if ( !this.moved ) {
 			this.scroller._execEvent('scrollStart');
+		}
+
+		if (this.cancelled) {
+			return;
 		}
 
 		this.moved = true;

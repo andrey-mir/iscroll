@@ -229,8 +229,14 @@ IScroll.prototype = {
 		this.directionX = deltaX > 0 ? -1 : deltaX < 0 ? 1 : 0;
 		this.directionY = deltaY > 0 ? -1 : deltaY < 0 ? 1 : 0;
 
-		if ( !this.moved ) {
+		this.cancelled = false;
+
+		if (!this.moved) {
 			this._execEvent('scrollStart');
+		}
+
+		if (this.cancelled) {
+			return;
 		}
 
 		this.moved = true;
@@ -332,6 +338,10 @@ IScroll.prototype = {
 		this.resizeTimeout = setTimeout(function () {
 			that.refresh();
 		}, this.options.resizePolling);
+	},
+
+	cancel: function() {
+		this.cancelled = true;
 	},
 
 	resetPosition: function (time) {
